@@ -1,6 +1,7 @@
 import { Fragment, useState} from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
+    AcademicCapIcon,
   Bars3Icon,
   BellIcon,
   CalendarIcon,
@@ -14,6 +15,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { SignIn, SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import { useRouter } from 'next/router';
 
 interface DashboardLayoutProps {
     children: React.ReactNode
@@ -39,33 +41,35 @@ interface NavigationItem {
     href: string
   }
 
-  
-const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
-]
-const teams = [
-  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
-]
-const userNavigation = [
-  { name: 'Your profile', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
 
 function classNames(...classes: (string | boolean | undefined)[]): string {
     return classes.filter(Boolean).join(' ')
   }
 
+
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const user = useUser();
+
+  const router = useRouter();
+
+  const navigation = [
+    { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: router.pathname === '/dashboard' },
+    { name: 'Order-flow', href: '/dashboard/order-flow', icon: AcademicCapIcon, current: router.pathname === '/dashboard/order-flow' },
+    { name: 'Statistics', href: '/dashboard/statistics', icon: ChartPieIcon, current: router.pathname === '/dashboard/statistics' },
+    { name: 'Research', href: '/dashboard/research', icon: FolderIcon, current: router.pathname === '/dashboard/research' },
+  ];
+
+  const teams = [
+    { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
+    { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
+    { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
+  ]
+  const userNavigation = [
+    { name: 'Your profile', href: '#' },
+    { name: 'Sign out', href: '#' },
+  ]
 
   return (
     <>
@@ -294,7 +298,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </div>
 
         <div className="lg:pl-72">
-          <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+          <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white pl-4 shadow-sm sm:gap-x-6 sm:pl-6 lg:pl-8">
             <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
               <span className="sr-only">Open sidebar</span>
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
