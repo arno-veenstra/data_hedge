@@ -327,7 +327,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                   name="search"
                 />
               </form>
-              <div className="flex items-center gap-x-4 lg:gap-x-6">
+              <div className="flex items-center gap-x-4 lg:gap-x-8">
                 <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -338,7 +338,16 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
                 {/* Profile dropdown */}
                 <div>
-                    {!user.isSignedIn && <SignInButton />}
+                {!user.isSignedIn && (
+      <SignInButton mode="modal">
+        <button
+          type="button"
+          className="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Sign In
+        </button>
+      </SignInButton>
+    )}
                     {!!user.isSignedIn && <UserButton />}
                 </div>
               </div>
