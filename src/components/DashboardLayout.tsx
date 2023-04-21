@@ -41,13 +41,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   ];
 
   const teams = [
-    { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-    { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-    { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
+    { id: 1, name: 'Documentation', href: '#', initial: 'H', current: false },
+    { id: 2, name: 'API', href: '#', initial: 'T', current: false },
   ]
 
   const settingsNavigation = [
-    { name: 'Settings', href: '/dashboard/settings', icon: Cog6ToothIcon, current: router.pathname === 'dashboard/settings' },
+    { name: 'Settings', href: '/dashboard/settings', icon: Cog6ToothIcon, current: router.pathname === '/dashboard/settings' },
   ]
 
   return (
@@ -135,7 +134,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                           </ul>
                         </li>
                         <li>
-                          <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
+                          <div className="text-xs font-semibold leading-6 text-gray-400">Other</div>
                           <ul role="list" className="-mx-2 mt-2 space-y-1">
                             {teams.map((team) => (
                               <li key={team.name}>
@@ -240,7 +239,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                   </ul>
                 </li>
                 <li>
-                  <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
+                  <div className="text-xs font-semibold leading-6 text-gray-400">Other</div>
                   <ul role="list" className="-mx-2 mt-2 space-y-1">
                     {teams.map((team) => (
                       <li key={team.name}>
@@ -339,16 +338,16 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 {/* Profile dropdown */}
                 <div>
                 {!user.isSignedIn && (
-      <SignInButton mode="modal">
-        <button
-          type="button"
-          className="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Sign In
-        </button>
-      </SignInButton>
-    )}
-                    {!!user.isSignedIn && <UserButton />}
+                    <SignInButton mode="modal">
+                      <button
+                        type="button"
+                        className="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      >
+                        Sign In
+                      </button>
+                    </SignInButton>
+                  )}
+                {!!user.isSignedIn && <UserButton />}
                 </div>
               </div>
             </div>

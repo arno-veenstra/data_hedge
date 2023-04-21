@@ -10,9 +10,16 @@ import {
 export default function Settings() {
   return (
     <DashboardLayout>
-           <SignedIn>
+        <SignedIn>
         {/* Signed in users will see their user profile */}
-        <UserProfile />
+        <UserProfile 
+            appearance={{
+                elements: {
+                    card: 'shadow-none',
+                    navbar: 'hidden'
+                }
+                }}
+        />
       </SignedIn>
       <SignedOut>
         <RedirectToSignIn />
